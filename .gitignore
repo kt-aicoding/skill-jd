@@ -1,0 +1,12 @@
+.DS_Store
+.playwright-cli/
+node_modules/
+*.log
+*.trace
+*.har
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mp4

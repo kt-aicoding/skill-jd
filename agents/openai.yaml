@@ -1,0 +1,4 @@
+interface:
+  display_name: "JD Shopping"
+  short_description: "京东商城可见低打扰慢速登录搜索加购辅助流程不下单不付款"
+  default_prompt: "Use $jd-shopping to log in manually, search JD products, and add an approved item to cart without checkout."
