@@ -5,10 +5,10 @@
 ## 一句话安装
 
 ```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills" && git clone https://github.com/kt-aicoding/skill-jd.git "${CODEX_HOME:-$HOME/.codex}/skills/jd-shopping"
+target="${CODEX_HOME:-$HOME/.codex}/skills/jd-shopping" && mkdir -p "$(dirname "$target")" && { [ -d "$target/.git" ] && git -C "$target" pull --ff-only || { rm -rf "$target" && git clone --depth 1 https://github.com/kt-aicoding/skill-jd.git "$target"; }; }
 ```
 
-如果目标目录已经存在，进入目录执行 `git pull` 更新即可。
+这条命令会安装或更新 `jd-shopping` skill 目录，但不会读取或修改浏览器登录态、Cookie、订单、地址或支付信息。
 
 ## 名称
 
@@ -62,7 +62,7 @@ python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_
 验证 wrapper 是否会拒绝破坏性命令：
 
 ```bash
-"${CODEX_HOME:-$HOME/.codex}/skills/jd-shopping/scripts/pw-jd.sh" close
+scripts/pw-jd.sh close
 ```
 
 预期会拒绝关闭浏览器。只有在用户明确要求清理会话时，才可以临时设置 `JD_ALLOW_DESTRUCTIVE=1`。
