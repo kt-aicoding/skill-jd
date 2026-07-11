@@ -2,13 +2,22 @@
 
 京东浏览器自动化辅助 skill，用于在用户自己的可见浏览器会话中进行低频、慢速、可监督的京东登录、搜索、比选和加购操作。它只辅助加购，不下单、不结算、不付款。
 
-## 一句话安装
+## 安装到 Codex
 
-```bash
-target="${CODEX_HOME:-$HOME/.codex}/skills/jd-shopping" && mkdir -p "$(dirname "$target")" && { [ -d "$target/.git" ] && git -C "$target" pull --ff-only || { rm -rf "$target" && git clone --depth 1 https://github.com/kt-aicoding/skill-jd.git "$target"; }; }
+推荐在 Codex 中使用内置安装器：
+
+```text
+Use $skill-installer to install jd-shopping from https://github.com/kt-aicoding/skill-jd.
 ```
 
-这条命令会安装或更新 `jd-shopping` skill 目录，但不会读取或修改浏览器登录态、Cookie、订单、地址或支付信息。
+本地开发时，把仓库链接到 Codex 当前用户目录：
+
+```bash
+mkdir -p "$HOME/.agents/skills"
+test -e "$HOME/.agents/skills/jd-shopping" || ln -s "$PWD" "$HOME/.agents/skills/jd-shopping"
+```
+
+安装不会读取或修改浏览器登录态、Cookie、订单、地址或支付信息。Codex 会自动检测 Skill 变化；若列表未刷新，重启 Codex。
 
 ## 名称
 
@@ -45,18 +54,19 @@ target="${CODEX_HOME:-$HOME/.codex}/skills/jd-shopping" && mkdir -p "$(dirname "
 
 ## 依赖
 
-- Codex skills 目录：默认 `${CODEX_HOME:-$HOME/.codex}/skills`
+- Codex 用户级 Skills 目录：`$HOME/.agents/skills`
 - Node.js/npm：用于提供 `npx`
-- 本机已安装 Playwright skill，并存在：
+- 本机已安装 Playwright Skill。wrapper 会依次查找：
 
 ```text
-${CODEX_HOME:-$HOME/.codex}/skills/playwright/scripts/playwright_cli.sh
+$HOME/.agents/skills/playwright/scripts/playwright_cli.sh
+${CODEX_HOME:-$HOME/.codex}/skills/playwright/scripts/playwright_cli.sh  # 兼容旧安装
 ```
 
 ## 验证安装
 
 ```bash
-python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" "${CODEX_HOME:-$HOME/.codex}/skills/jd-shopping"
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" .
 ```
 
 验证 wrapper 是否会拒绝破坏性命令：

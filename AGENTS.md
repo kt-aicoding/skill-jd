@@ -7,6 +7,7 @@
 ## Editing Rules
 
 - Keep reusable skill instructions in `SKILL.md`.
+- Keep the frontmatter `description` at or below 140 characters and start with `京东/JD/Jingdong` so it stays distinct from Taobao.
 - Keep helper scripts under `scripts/` and agent metadata under `agents/`.
 - Preserve the safety boundary: the skill may assist low-frequency, visible, user-supervised shopping flows, but must not checkout, pay, bypass verification, scrape at scale, or hide automation.
 - Never commit browser profiles, cookies, tokens, screenshots, snapshots, account details, addresses, phone numbers, orders, payment data, or copied `.env` values.

@@ -1,6 +1,6 @@
 ---
 name: jd-shopping
-description: Use for JD/Jingdong browser automation tasks that assist a logged-in user with low-frequency personal shopping flows, especially opening JD in a visible browser, handing off manual login or verification, searching products, comparing a few candidates, selecting approved SKU options, and adding an item to cart without checkout. Trigger when the user asks to operate 京东/JD/Jingdong, log in to JD, search JD products, add JD products to cart, or continue a JD shopping automation session.
+description: "京东/JD/Jingdong shopping in a visible browser: login, search, compare, select an approved SKU, and add to cart. Never checkout or pay."
 ---
 
 # JD Shopping Automation
@@ -20,11 +20,11 @@ Automate JD only as a visible, user-supervised shopping assistant. Prefer slow, 
 
 ## Preferred Tooling
 
-Use the bundled JD wrapper for all JD browser commands:
+Resolve this Skill's directory from the loaded `SKILL.md` path, then use its bundled wrapper for every JD browser command:
 
 ```bash
-export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
-export JDPW="$CODEX_HOME/skills/jd-shopping/scripts/pw-jd.sh"
+export JDPW="<skill-directory>/scripts/pw-jd.sh"
+test -x "$JDPW"
 ```
 
 The wrapper forces `PLAYWRIGHT_CLI_SESSION=jd` and refuses destructive commands such as `close`, `close-all`, `kill-all`, `delete-data`, and storage clearing unless `JD_ALLOW_DESTRUCTIVE=1` is set after the user explicitly asks.
